@@ -1,0 +1,50 @@
+### 게시글 조회
+GET http://localhost:8080/api/board
+
+### 게시글 상세조회
+GET http://localhost:8080/api/board/1
+
+### 게시글 생성
+POST http://localhost:8080/api/board
+Content-Type: application/json
+
+{
+  "title": "Board 1",
+  "content": "Board 1 content"
+}
+
+### 게시글 수정
+PATCH http://localhost:8080/api/board/2
+Content-Type: application/json
+
+{
+  "title": "Board 2",
+  "content": "Board 2 content update"
+}
+
+### 게시글 삭제
+DELETE http://localhost:8080/api/board/1
+
+
+### 댓글 조회
+GET http://localhost:8080/api/comment?boardId=1
+
+### 댓글 생성
+POST http://localhost:8080/api/comment
+Content-Type: application/json
+
+{
+    "boardId": 1,
+    "content": "Board1 Comment 4"
+}
+
+### 댓글 수정
+PATCH http://localhost:8080/api/comment/2
+Content-Type: application/json
+
+{
+  "content": "Comment 2 update"
+}
+
+### 댓글 삭제
+DELETE http://localhost:8080/api/comment/3

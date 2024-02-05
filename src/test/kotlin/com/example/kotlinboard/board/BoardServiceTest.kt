@@ -6,18 +6,20 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
+import org.springframework.context.ApplicationEventPublisher
 import java.util.*
 
 class BoardServiceTest(
 ) {
     lateinit var boardService: BoardService
     lateinit var boardRepository: BoardRepository
+    lateinit var eventPublisher: ApplicationEventPublisher
 
     @BeforeEach
     fun setUp() {
         boardRepository = Mockito.mock(BoardRepository::class.java)
-        boardService = BoardService()
-        boardService.boardRepository = boardRepository
+        eventPublisher = Mockito.mock(ApplicationEventPublisher::class.java)
+        boardService = BoardService(boardRepository, eventPublisher)
     }
 
     @Test

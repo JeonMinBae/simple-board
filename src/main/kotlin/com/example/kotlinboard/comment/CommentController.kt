@@ -1,7 +1,6 @@
 package com.example.kotlinboard.comment
 
 import com.example.kotlinboard.common.Response
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -30,8 +29,4 @@ class CommentController (
         commentService.delete(id)
     }
 
-    @ExceptionHandler(IllegalArgumentException::class)
-    fun illegalArgumentException(e: IllegalArgumentException): ResponseEntity<Any> {
-        return Response.error(HttpStatus.NOT_FOUND, e.message?: "에러가 발생하였습니다.")
-    }
 }

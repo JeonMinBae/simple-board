@@ -14,6 +14,7 @@ class Comment(
     @Column(name = "comment_id")
     val id: Long? = null,
     var content: String,
+    val author: String,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val boardId: Long
 ) {

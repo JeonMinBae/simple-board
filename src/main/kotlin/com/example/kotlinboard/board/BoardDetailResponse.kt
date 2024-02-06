@@ -7,6 +7,7 @@ class BoardDetailResponse(
     val title: String,
     val content: String,
     val view: Long,
+    val author: String,
     val createdAt: LocalDateTime
 ) {
     constructor(board: Board) : this(
@@ -14,6 +15,7 @@ class BoardDetailResponse(
         title = board.title,
         content = board.content,
         view = board.view,
+        author = board.author,
         createdAt = board.createdAt
     )
 }

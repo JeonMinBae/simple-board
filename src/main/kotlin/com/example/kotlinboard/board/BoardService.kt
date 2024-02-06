@@ -1,5 +1,6 @@
 package com.example.kotlinboard.board
 
+import com.example.kotlinboard.authentication.CurrentUser
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -27,7 +28,7 @@ class BoardService(
 
     @Transactional
     fun createBoard(request: CreateBoardRequest): Long {
-        val board = Board(title = request.title, content = request.content)
+        val board = Board(title = request.title, content = request.content, author = CurrentUser.username)
 
         val newBoard = boardRepository.save(board)
         return newBoard.id!!
@@ -48,6 +49,6 @@ class BoardService(
     }
 
     private fun findBoard(id: Long): Board =
-        boardRepository.findById(id).orElseThrow { throw IllegalArgumentException("게시글을 찾을 수 없습니다.") }
+        boardRepository.findById(id).orElseThrow { throw IllegalStateException("게시글을 찾을 수 없습니다.") }
 
 }

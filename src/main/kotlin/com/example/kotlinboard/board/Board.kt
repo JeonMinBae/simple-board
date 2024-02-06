@@ -12,6 +12,7 @@ class Board (
     var title: String,
     var content: String,
     var view: Long = 0,
+    val author: String,
     val createdAt: LocalDateTime = LocalDateTime.now()
 ){
 

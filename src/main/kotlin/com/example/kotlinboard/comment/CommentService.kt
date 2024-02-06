@@ -1,5 +1,6 @@
 package com.example.kotlinboard.comment
 
+import com.example.kotlinboard.authentication.CurrentUser
 import com.example.kotlinboard.board.BoardRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -20,7 +21,7 @@ class CommentService(
     @Transactional
     fun createComment(request: CreateCommentRequest): Long {
         checkExistBoard(request.boardId)
-        val comment = Comment(content = request.content, boardId = request.boardId)
+        val comment = Comment(content = request.content, boardId = request.boardId, author = CurrentUser.username)
         val newComment = commentRepository.save(comment)
 
         return newComment.id!!
@@ -28,7 +29,7 @@ class CommentService(
 
     private fun checkExistBoard(boardId: Long) {
         if (!boardRepository.existsById(boardId)) {
-            throw IllegalArgumentException("해당 게시글이 없습니다.")
+            throw IllegalStateException("게시글을 찾을 수 없습니다.")
         }
     }
 
@@ -41,7 +42,7 @@ class CommentService(
     }
 
     private fun findComment(id: Long): Comment =
-        commentRepository.findById(id).orElseThrow { throw IllegalArgumentException("해당 댓글이 없습니다.") }
+        commentRepository.findById(id).orElseThrow { throw IllegalStateException("댓글을 찾을 수 없습니다.") }
 
     @Transactional
     fun delete(id: Long) {

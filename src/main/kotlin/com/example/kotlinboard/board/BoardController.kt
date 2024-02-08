@@ -18,7 +18,7 @@ class BoardController(
     }
 
     @GetMapping("/{id}")
-    fun getBoards(@PathVariable id: Long): ResponseEntity<Any> {
+    fun getBoard(@PathVariable id: Long): ResponseEntity<Any> {
         val boardDetail = boardService.getBoard(id)
         return Response.ok(boardDetail)
     }
@@ -26,7 +26,7 @@ class BoardController(
     @PostMapping("")
     fun createBoard(@RequestBody request: CreateBoardRequest): ResponseEntity<Any> {
         val board = boardService.createBoard(request)
-        return Response.ok(board)
+        return Response.created(board)
     }
 
     @PatchMapping("/{id}")

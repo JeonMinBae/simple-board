@@ -16,7 +16,7 @@ class CommentController (
 
     @PostMapping("")
     fun createComment(@RequestBody request: CreateCommentRequest): ResponseEntity<Any> {
-        return Response.ok(commentService.createComment(request))
+        return Response.created(commentService.createComment(request))
     }
 
     @PatchMapping("/{id}")

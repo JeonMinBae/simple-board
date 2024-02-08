@@ -1,5 +1,6 @@
 package com.example.kotlinboard.common
 
+import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatusCode
 import org.springframework.http.ResponseEntity
 import java.time.LocalDateTime
@@ -13,6 +14,7 @@ class Response<T>(
 ) {
     companion object {
         fun <S> ok(data: S): ResponseEntity<Any> = ResponseEntity.ok(Response(status = Status.SUCCESS, data = data))
+        fun <S> created(data: S): ResponseEntity<Any> = ResponseEntity.status(HttpStatus.CREATED).body(Response(status = Status.SUCCESS, data = data))
         fun noContent(): ResponseEntity<Any> = ResponseEntity.noContent().build()
         fun error(status: HttpStatusCode, message: String): ResponseEntity<Any> =
             ResponseEntity.status(status).body(Response(status = Status.ERROR, data = message))

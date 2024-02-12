@@ -9,9 +9,10 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.http.MediaType
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders
 import org.springframework.restdocs.payload.JsonFieldType
+import org.springframework.restdocs.payload.JsonFieldType.NUMBER
+import org.springframework.restdocs.payload.JsonFieldType.STRING
 import org.springframework.restdocs.payload.PayloadDocumentation.*
-import org.springframework.restdocs.request.RequestDocumentation.parameterWithName
-import org.springframework.restdocs.request.RequestDocumentation.pathParameters
+import org.springframework.restdocs.request.RequestDocumentation.*
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import java.time.LocalDateTime
@@ -38,13 +39,17 @@ class BoardControllerTest : BaseControllerTest() {
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andDo(
                 this.restDocs.document(
+                    queryParameters(
+                        parameterWithName("page").description("페이지 번호"),
+                        parameterWithName("size").description("페이지 사이즈")
+                    ),
                     responseFields(
                         beneathPath("data.content").withSubsectionId("data"),
-                        fieldWithPath("id").type(JsonFieldType.NUMBER).description("게시글 ID"),
-                        fieldWithPath("title").type(JsonFieldType.STRING).description("제목"),
-                        fieldWithPath("view").type(JsonFieldType.NUMBER).description("조회수"),
-                        fieldWithPath("author").type(JsonFieldType.STRING).description("작성자"),
-                        fieldWithPath("createdAt").type(JsonFieldType.STRING).description("작성일")
+                        fieldWithPath("id").type(NUMBER).description("게시글 ID"),
+                        fieldWithPath("title").type(STRING).description("제목"),
+                        fieldWithPath("view").type(NUMBER).description("조회수"),
+                        fieldWithPath("author").type(STRING).description("작성자"),
+                        fieldWithPath("createdAt").type(STRING).description("작성일")
                     )
                 )
             )
@@ -70,12 +75,12 @@ class BoardControllerTest : BaseControllerTest() {
                     ),
                     responseFields(
                         beneathPath("data").withSubsectionId("data"),
-                        fieldWithPath("id").type(JsonFieldType.NUMBER).description("게시글 ID"),
-                        fieldWithPath("title").type(JsonFieldType.STRING).description("제목"),
-                        fieldWithPath("content").type(JsonFieldType.STRING).description("내용"),
-                        fieldWithPath("view").type(JsonFieldType.NUMBER).description("조회수"),
-                        fieldWithPath("author").type(JsonFieldType.STRING).description("작성자"),
-                        fieldWithPath("createdAt").type(JsonFieldType.STRING).description("작성일")
+                        fieldWithPath("id").type(NUMBER).description("게시글 ID"),
+                        fieldWithPath("title").type(STRING).description("제목"),
+                        fieldWithPath("content").type(STRING).description("내용"),
+                        fieldWithPath("view").type(NUMBER).description("조회수"),
+                        fieldWithPath("author").type(STRING).description("작성자"),
+                        fieldWithPath("createdAt").type(STRING).description("작성일")
                     )
                 )
             )
@@ -99,11 +104,11 @@ class BoardControllerTest : BaseControllerTest() {
             .andDo(
                 this.restDocs.document(
                     requestFields(
-                        fieldWithPath("title").type(JsonFieldType.STRING).description("제목"),
-                        fieldWithPath("content").type(JsonFieldType.STRING).description("내용")
+                        fieldWithPath("title").type(STRING).description("제목"),
+                        fieldWithPath("content").type(STRING).description("내용")
                     ),
                     relaxedResponseFields(
-                        fieldWithPath("data").type(JsonFieldType.NUMBER).description("생성된 인덱스")
+                        fieldWithPath("data").type(NUMBER).description("생성된 인덱스")
                     )
                 )
             )
@@ -129,11 +134,11 @@ class BoardControllerTest : BaseControllerTest() {
                         parameterWithName("id").description("게시글 ID")
                     ),
                     requestFields(
-                        fieldWithPath("title").type(JsonFieldType.STRING).description("제목"),
-                        fieldWithPath("content").type(JsonFieldType.STRING).description("내용")
+                        fieldWithPath("title").type(STRING).description("제목"),
+                        fieldWithPath("content").type(STRING).description("내용")
                     ),
                     relaxedResponseFields(
-                        fieldWithPath("data").type(JsonFieldType.NUMBER).description("수정된 인덱스")
+                        fieldWithPath("data").type(NUMBER).description("수정된 인덱스")
                     )
                 )
             )
@@ -148,6 +153,13 @@ class BoardControllerTest : BaseControllerTest() {
                 .header("Authorization", bearerToken)
         )
             .andExpect(MockMvcResultMatchers.status().isNoContent)
+            .andDo(
+                this.restDocs.document(
+                    pathParameters(
+                        parameterWithName("id").description("게시글 ID")
+                    )
+                )
+            )
     }
 
 

@@ -2,6 +2,7 @@ package com.example.kotlinboard.board
 
 import com.example.kotlinboard.authentication.AuthenticationService
 import com.example.kotlinboard.authentication.SignInDto
+import com.example.kotlinboard.comment.CommentService
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
@@ -29,6 +30,7 @@ abstract class BaseControllerTest {
     protected var bearerToken: String? = null
     protected var mockMvc: MockMvc? = null
     protected val restDocs = restDocs()
+    private val objectMapper = ObjectMapper()
 
 
     @Autowired
@@ -36,7 +38,8 @@ abstract class BaseControllerTest {
 
     @MockBean
     protected lateinit var boardService: BoardService
-    val objectMapper = ObjectMapper()
+    @MockBean
+    protected lateinit var commentService: CommentService
 
     @BeforeEach
     fun setUp(webApplicationContext: WebApplicationContext, restDocumentation: RestDocumentationContextProvider) {

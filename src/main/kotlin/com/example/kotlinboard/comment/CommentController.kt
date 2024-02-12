@@ -25,8 +25,9 @@ class CommentController (
     }
 
     @DeleteMapping("/{id}")
-    fun deleteComment(@PathVariable id: Long) {
+    fun deleteComment(@PathVariable id: Long): ResponseEntity<Any> {
         commentService.delete(id)
+        return Response.noContent()
     }
 
 }

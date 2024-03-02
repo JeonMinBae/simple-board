@@ -12,10 +12,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 abstract class BaseEntity: BaseTimeEntity(){
     @Column(name = "register_user", updatable = false)
     @CreatedBy
-    var registerUser: String? = null
+    var registerUser: String = ""
         private set
 
     @Column(name = "update_user")
     @LastModifiedBy
-    var updateUser: String? = null
+    var updateUser: String = ""
 }

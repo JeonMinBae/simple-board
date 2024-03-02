@@ -16,6 +16,8 @@
 :operation-response-fields-data-title: 응답 본문
 :operation-common-httpstatus-code-title: Common Status
 
+[[board]]
+== 게시판
 
 [[board-list]]
 === 게시판 목록조회
@@ -45,6 +47,8 @@ operation::board-controller-test/update-board[snippets='http-request,path-parame
 operation::board-controller-test/delete-board[snippets='http-request,path-parameters,http-response']
 
 
+[[comment]]
+== 댓글
 
 [[comment-list]]
 === 댓글 목록조회

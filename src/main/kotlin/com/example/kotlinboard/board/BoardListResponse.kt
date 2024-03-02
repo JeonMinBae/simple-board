@@ -13,7 +13,7 @@ class BoardListResponse(
         id = board.id!!,
         title = board.title,
         view = board.view,
-        author = board.author,
-        createdAt = board.createdAt
+        author = board.registerUser,
+        createdAt = board.createdAt!!
     )
 }

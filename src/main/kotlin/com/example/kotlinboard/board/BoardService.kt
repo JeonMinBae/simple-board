@@ -1,6 +1,5 @@
 package com.example.kotlinboard.board
 
-import com.example.kotlinboard.authentication.CurrentUser
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -28,7 +27,7 @@ class BoardService(
 
     @Transactional
     fun createBoard(request: CreateBoardRequest): Long {
-        val board = Board(title = request.title, content = request.content, author = CurrentUser.username)
+        val board = Board(title = request.title, content = request.content)
 
         val newBoard = boardRepository.save(board)
         return newBoard.id!!

@@ -22,10 +22,10 @@ class CommentControllerTest: BaseControllerTest(){
     @DisplayName("댓글 목록 조회")
     fun getComments(){
         val comments = listOf(
-            Comment(1L, "comment1", "user1", LocalDateTime.now(), 1L),
-            Comment(2L, "comment2", "user1", LocalDateTime.now(), 1L),
-            Comment(3L, "comment3", "user2", LocalDateTime.now(), 1L),
-            Comment(4L, "comment4", "user3", LocalDateTime.now(), 1L),
+            CommentListResponse(1L, "comment1", 1L, "user1", LocalDateTime.now(), LocalDateTime.now()),
+            CommentListResponse(2L, "comment2", 1L, "user1", LocalDateTime.now(), LocalDateTime.now()),
+            CommentListResponse(3L, "comment3", 1L, "user2", LocalDateTime.now(), LocalDateTime.now()),
+            CommentListResponse(4L, "comment4", 1L, "user3", LocalDateTime.now(), LocalDateTime.now()),
         )
 
         Mockito.`when`(commentService.getComments(anyLong())).thenReturn(comments)
@@ -47,6 +47,7 @@ class CommentControllerTest: BaseControllerTest(){
                         fieldWithPath("content").type(STRING).description("내용"),
                         fieldWithPath("author").type(STRING).description("작성자"),
                         fieldWithPath("createdAt").type(STRING).description("작성일"),
+                        fieldWithPath("updatedAt").type(STRING).description("수정일"),
                         fieldWithPath("boardId").type(NUMBER).description("게시글 ID")
                     )
                 )

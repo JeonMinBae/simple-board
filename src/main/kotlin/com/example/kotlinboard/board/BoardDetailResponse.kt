@@ -8,14 +8,14 @@ class BoardDetailResponse(
     val content: String,
     val view: Long,
     val author: String,
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime?
 ) {
     constructor(board: Board) : this(
         id = board.id!!,
         title = board.title,
         content = board.content,
         view = board.view,
-        author = board.author,
+        author = board.registerUser,
         createdAt = board.createdAt
     )
 }

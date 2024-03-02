@@ -16,6 +16,7 @@ class BoardServiceTest(
 
     @BeforeEach
     fun setUp() {
+
         boardRepository = Mockito.mock(BoardRepository::class.java)
         eventPublisher = Mockito.mock(ApplicationEventPublisher::class.java)
         boardService = BoardService(boardRepository, eventPublisher)
@@ -23,7 +24,7 @@ class BoardServiceTest(
 
     @Test
     fun test() {
-        val board = Board(id = 1L, title = "title", content = "content", author = "author")
+        val board = Board(id = 1L, title = "title", content = "content")
         `when`(boardRepository.findById(1L)).thenReturn(Optional.of(board))
         val getBoard = boardService.getBoard(1L)
 

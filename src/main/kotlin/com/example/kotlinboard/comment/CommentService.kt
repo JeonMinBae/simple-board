@@ -1,6 +1,5 @@
 package com.example.kotlinboard.comment
 
-import com.example.kotlinboard.authentication.CurrentUser
 import com.example.kotlinboard.board.BoardRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -12,16 +11,16 @@ class CommentService(
 ) {
 
     @Transactional(readOnly = true)
-    fun getComments(boardId: Long): List<Comment> {
+    fun getComments(boardId: Long): List<CommentListResponse> {
         checkExistBoard(boardId)
 
-        return commentRepository.findAllByBoardId(boardId)
+        return commentRepository.findAllByBoardId(boardId).map { CommentListResponse(it) }.toList()
     }
 
     @Transactional
     fun createComment(request: CreateCommentRequest): Long {
         checkExistBoard(request.boardId)
-        val comment = Comment(content = request.content, boardId = request.boardId, author = CurrentUser.username)
+        val comment = Comment(content = request.content, boardId = request.boardId)
         val newComment = commentRepository.save(comment)
 
         return newComment.id!!

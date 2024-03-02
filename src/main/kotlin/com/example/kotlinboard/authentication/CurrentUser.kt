@@ -4,7 +4,7 @@ import com.example.kotlinboard.user.User
 
 
 object CurrentUser {
-    private val currentUser = ThreadLocal<User>()
+    private val currentUser = ThreadLocal.withInitial { User("", "", "") }
 
     fun set(user: User) {
         currentUser.set(user)

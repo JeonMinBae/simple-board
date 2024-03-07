@@ -2,7 +2,6 @@ package com.example.kotlinboard.board
 
 import com.example.kotlinboard.common.BaseEntity
 import jakarta.persistence.*
-import java.time.LocalDateTime
 
 @Entity
 class Board (

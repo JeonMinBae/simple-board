@@ -3,7 +3,7 @@ POST http://localhost:8080/api/auth/sign-in
 Content-Type: application/json
 
 {
-  "id": "user1@cawave.co.kr",
+  "id": "user3@cawave.co.kr",
   "password": "qwe123!@#"
 }
 
@@ -16,7 +16,7 @@ GET http://localhost:8080/api/board
 Authorization: Bearer {{token}}
 
 ### 게시글 상세조회
-GET http://localhost:8080/api/board/1
+GET http://localhost:8080/api/board/2
 Authorization: Bearer {{token}}
 
 ### 게시글 생성
@@ -25,8 +25,8 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "title": "Board 1",
-  "content": "Board 1 content"
+  "title": "Board 3",
+  "content": "Board 3 content"
 }
 
 ### 게시글 수정
